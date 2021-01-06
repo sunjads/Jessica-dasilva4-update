@@ -1036,7 +1036,26 @@ ServerSignature Off
 # <IfModule mod_headers.c>
 #     Header merge Cache-Control "no-transform"
 # </IfModule>
-
+<IfModule mod_headers.c>
+  <FilesMatch "\\.(css)$">
+  Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+  <FilesMatch "\\.(x?html?|php)$">
+  Header set Cache-Control "max-age=600, private, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\\.(png)$">
+  Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+  <FilesMatch "\\.(jpg)$">
+  Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+  <FilesMatch "\\.(js)$">
+  Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+  <FilesMatch "\\.(gif)$">
+  Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+  </IfModule>
 # ----------------------------------------------------------------------
 # | ETags                                                              |
 # ----------------------------------------------------------------------
@@ -1223,23 +1242,4 @@ FileETag None
 #     RewriteCond %{REQUEST_FILENAME} !-f
 #     RewriteRule ^(.+)\.(\w+)\.(bmp|css|cur|gif|ico|jpe?g|m?js|a?png|svgz?|webp|webmanifest)$ $1.$3 [L]
 # </IfModule>
-  <IfModule mod_headers.c>
-  <FilesMatch "\\.(css)$">
-  Header set Cache-Control "max-age=604800, public"
-  </FilesMatch>
-  <FilesMatch "\\.(x?html?|php)$">
-  Header set Cache-Control "max-age=600, private, must-revalidate"
-  </FilesMatch>
-  <FilesMatch "\\.(png)$">
-  Header set Cache-Control "max-age=604800, public"
-  </FilesMatch>
-  <FilesMatch "\\.(jpg)$">
-  Header set Cache-Control "max-age=604800, public"
-  </FilesMatch>
-  <FilesMatch "\\.(js)$">
-  Header set Cache-Control "max-age=604800, public"
-  </FilesMatch>
-  <FilesMatch "\\.(gif)$">
-  Header set Cache-Control "max-age=604800, public"
-  </FilesMatch>
-  </IfModule>
+  
